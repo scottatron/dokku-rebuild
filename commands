@@ -10,6 +10,7 @@ case "$1" in
     APP="$2"
     REPO="$DOKKU_ROOT/$APP"
     REF=$(cat $REPO/refs/heads/master)
+    pluginhook pre-rebuild $APP
     cd $REPO && git archive $REF | dokku receive $APP | sed -u "s/^/"$'\e[1G'"/"
     ;;
 
